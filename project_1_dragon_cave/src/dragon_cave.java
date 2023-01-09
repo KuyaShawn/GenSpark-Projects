@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class dragon_cave {
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
 
