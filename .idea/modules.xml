@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/GenSpark-Projects.iml" filepath="$PROJECT_DIR$/.idea/GenSpark-Projects.iml" />
       <module fileurl="file://$PROJECT_DIR$/project_1_dragon_cave/project_1_dragon_cave.iml" filepath="$PROJECT_DIR$/project_1_dragon_cave/project_1_dragon_cave.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project_2_guess_the_number/project_2_guess_the_number.iml" filepath="$PROJECT_DIR$/project_2_guess_the_number/project_2_guess_the_number.iml" />
     </modules>
   </component>
 </project>
