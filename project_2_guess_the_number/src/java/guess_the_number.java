@@ -6,13 +6,24 @@ public class guess_the_number {
 
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
-        int guessCount = 0;
+        String usersName = "";
 
         try {
             //Prints a dialogue into console
             System.out.println("Hello! What is your name?");
+
             // reads the user's name as the input
-            setName(isNameValid(userInput.nextLine()));
+            usersName = userInput.nextLine();
+            setName(usersName);
+            //Checks if user's input is empty or is invalid.
+
+            if (usersName.isEmpty()) {
+                throw new IllegalArgumentException("Caught Exception: Invalid Name.");
+            }
+            if (!usersName.matches("[a-zA-Z]+")) {
+                throw new IllegalArgumentException("Caught Exception: Invalid Name.");
+            }
+
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(e.getMessage());
         }
@@ -22,7 +33,8 @@ public class guess_the_number {
             */
         do {
             int randNum = randomNumGenerator();
-            introDialogue();
+            System.out.println(introDialogue());
+            int guessCount = 0;
             while (true) {
                 try {
                     // reads the user's inputted number
@@ -38,7 +50,7 @@ public class guess_the_number {
                         guessCount++;
                     } else {
                         guessCount++;
-                        System.out.println("Good job, " + getName() + "! You guessed my number in " + guessCount + " guesses!");
+                        System.out.println("Good job, " + usersName + "! You guessed my number in " + guessCount + " guesses!");
                         break;
                     }
                 } catch (NumberFormatException e) {
@@ -58,16 +70,6 @@ public class guess_the_number {
                 "take a guess.";
     }
 
-    public static String isNameValid(String usersName) {
-        //Checks if user's input is empty or is invalid.
-        if (usersName.isEmpty()) {
-            throw new IllegalArgumentException("Caught Exception: Invalid Name.");
-        } else if (!usersName.matches("[a-zA-Z]+")) {
-            throw new IllegalArgumentException("Caught Exception: Invalid Name.");
-        }
-        return usersName;
-    }
-
     public static int randomNumGenerator() {
         Random rand = new Random();
         return rand.nextInt(20) + 1;
@@ -82,9 +84,8 @@ public class guess_the_number {
                 // Asks the user for their input if they want to continue playing or not
                 System.out.println("Would you like to play again? (Y or N)");
                 replayChoice = userInput.next();
-                playAgain = true;
                 if (replayChoice.equalsIgnoreCase("y")) {
-                    return true;
+                    playAgain = true;
                 } else if (replayChoice.equalsIgnoreCase("n")) {
                     return false;
                 } else {
