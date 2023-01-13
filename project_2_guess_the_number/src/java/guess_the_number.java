@@ -37,19 +37,15 @@ public class guess_the_number {
             int guessCount = 0;
             while (true) {
                 try {
+                    String corretlyGuessed = "";
                     // reads the user's inputted number
                     int usersNumGuess = userInput.nextInt();
+                    corretlyGuessed = checkResponse(usersNumGuess, randNum);
+                    guessCount++;
                     //Checks if user's number is too high, low, or just right to continue the game
-                    if (usersNumGuess > randNum) {
-                        System.out.println("Your Guess is too high." + '\n'
-                                + "Take a guess.");
-                        guessCount++;
-                    } else if (usersNumGuess < randNum) {
-                        System.out.println("Your Guess is too low." + '\n'
-                                + "Take a guess.");
-                        guessCount++;
+                    if (corretlyGuessed != "1") {
+                        System.out.println(corretlyGuessed);
                     } else {
-                        guessCount++;
                         System.out.println("Good job, " + usersName + "! You guessed my number in " + guessCount + " guesses!");
                         break;
                     }
@@ -95,9 +91,20 @@ public class guess_the_number {
             } catch (IllegalArgumentException e) {
                 System.out.println("Caught Exception: Invalid Choice.");
             }
-
         } while (!playAgain);
         return playAgain;
+    }
+
+    public static String checkResponse(int usersNumGuess, int randNum) {
+        if (usersNumGuess > randNum) {
+            return "Your Guess is too high." + '\n'
+                    + "Take a guess.";
+        }
+        if (usersNumGuess < randNum) {
+            return "Your Guess is too low." + '\n'
+                    + "Take a guess.";
+        }
+        return "1";
     }
 
     public static void setName(String playerName) {

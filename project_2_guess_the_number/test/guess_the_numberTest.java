@@ -7,16 +7,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class guess_the_numberTest {
 
+    guess_the_number guessTheNumber;
     @BeforeEach
     void setUp() {
-        guess_the_number.setName("Test Name");
+        guessTheNumber = new guess_the_number();
+        guessTheNumber.setName("Test Name");
     }
 
     @Test
     void introDialogue() {
-        String expectedIntroDialogue = "Well, " + guess_the_number.getName() + ", I am thinking of a number between 1 and 20." + '\n' +
+        String expectedIntroDialogue = "Well, " + guessTheNumber.getName() + ", I am thinking of a number between 1 and 20." + '\n' +
                 "take a guess.";
-        assertEquals(expectedIntroDialogue, guess_the_number.introDialogue(), "Intro message error");
+        assertEquals(expectedIntroDialogue, guessTheNumber.introDialogue(), "Intro message error");
     }
 
     @Test
@@ -24,7 +26,7 @@ class guess_the_numberTest {
         String trueInput = "y";
         InputStream testCase1 = new ByteArrayInputStream(trueInput.getBytes());
         System.setIn(testCase1);
-        assertTrue(guess_the_number.replayGame());
+        assertTrue(guessTheNumber.replayGame());
     }
 
     @Test
@@ -32,7 +34,21 @@ class guess_the_numberTest {
         String trueInput = "n";
         InputStream testCase1 = new ByteArrayInputStream(trueInput.getBytes());
         System.setIn(testCase1);
-        assertFalse(guess_the_number.replayGame());
+        assertFalse(guessTheNumber.replayGame());
+    }
+
+    @Test
+    void checkResponseTooHigh() {
+        String expected = "Your Guess is too high." + '\n'
+                + "Take a guess.";
+        assertEquals(expected,guessTheNumber.checkResponse(15,7), "High guess response error");
+    }
+
+    @Test
+    void checkResponseTooLow() {
+        String expected = "Your Guess is too low." + '\n'
+                + "Take a guess.";
+        assertEquals(expected,guessTheNumber.checkResponse(4,7),"low guess response error");
     }
 
     @AfterEach
