@@ -2,11 +2,13 @@ import java.util.Scanner;
 
 public class dragon_cave {
     public static void main(String[] args) {
+        Scanner userInput = new Scanner(System.in);
         // Prints dialog into console
         System.out.println(introDialog());
 
         try {
-            System.out.println(getCaveChoice());
+            // reads user's input
+            System.out.println(getCaveChoice(userInput.nextInt()));
         } catch (NumberFormatException e) {
             System.out.println("Invalid cave choice");
         }
@@ -20,10 +22,7 @@ public class dragon_cave {
                 "which cave will you go into? (1 or 2)";
     }
 
-    public static String getCaveChoice() {
-        Scanner userInput = new Scanner(System.in);
-        // reads user's input
-        int caveChoice = userInput.nextInt();
+    public static String getCaveChoice(int caveChoice) {
 
         // user input's choice code.
         if (caveChoice == 1) {
