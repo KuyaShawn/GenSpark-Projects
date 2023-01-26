@@ -7,7 +7,6 @@ public class hangman {
     // create an array of letters that have been guessed
     private static ArrayList<Character> guessedLetters;
 
-
     // Starting Dialog for the Hangman Game
     public static String startingDialog() {
         String startingDialog = "Welcome to the Hangman game, you will be given a word by a computer and all you " +
@@ -163,8 +162,6 @@ public class hangman {
 
     }
 
-
-
     public static ArrayList<Character> guessedList(char letter) {
         ArrayList<Character> guessedList = new ArrayList<>();
         guessedList.add(letter);
@@ -172,15 +169,14 @@ public class hangman {
         return guessedList;
     }
 
-
     public static boolean alreadyGuessed(char guessLetter) {
         boolean alreadyGuessed = false;
         ArrayList<Character> guessedList = new ArrayList<>();
-        if(guessedList.isEmpty()){
+        if (guessedList.isEmpty()) {
             guessedList.add(guessLetter);
             alreadyGuessed = true;
         }
-        for(int i = 0; i < guessedList.size(); i++){
+        for (int i = 0; i < guessedList.size(); i++) {
             if (guessedList.get(i) != guessLetter) {
                 guessedList.add(guessLetter);
                 alreadyGuessed = true;
@@ -228,7 +224,8 @@ public class hangman {
         return playAgain;
     }
 
-    public static void startGame() {
+    public static boolean startGame() {
+        boolean replayGame = false;
         int guessedLettersCount = 0;
 
         Scanner input = new Scanner(System.in);
@@ -264,7 +261,7 @@ public class hangman {
             // Check if the letter has been guessed
             boolean alreadyGuessed = alreadyGuessed(guessInput);
 
-            if(alreadyGuessed){
+            if (alreadyGuessed) {
                 System.out.println("You have already guessed that letter. Choose again.");
                 continue;
             }
@@ -283,16 +280,16 @@ public class hangman {
             }
 
             // if the letter is not in the word, increase the stae of the hangman
-            if(!isCorrect){
+            if (!isCorrect) {
                 hangmanStage++;
                 System.out.println("Incorrect.");
-            }else {
+            } else {
                 System.out.println("Correct!");
             }
 
-            if(isWordGuessed(underscores)){
+            if (isWordGuessed(underscores)) {
                 System.out.println("Congratulations! You guessed the word.");
-            }else {
+            } else {
                 // Print the final state of the word to guess
                 System.out.print("Word to guess: ");
                 for (int i = 0; i < underscores.length; i++) {
@@ -304,10 +301,11 @@ public class hangman {
                 System.out.println("Sorry, you lose. The word was " + wordToGuess + ".");
             }
 
+            replayGame = replayGame();
 
         }
+        return replayGame;
     }
-
 
     public static String getRandomWord() {
         return randomWord;
@@ -326,13 +324,17 @@ public class hangman {
     }
 
     public static void main(String[] args) {
+        boolean playAgain = true;
         System.out.println(generateWord());
         System.out.println(startingDialog());
         System.out.println("To start the game Enter your name.");
         if (!getPlayerTwo().isEmpty()) {
-            startGame();
+            while (playAgain) {
+                startGame();
+            }
+        }else{
+            System.out.println("Invalid Choice");
         }
-
 
     }
 }
