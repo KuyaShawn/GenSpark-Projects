@@ -4,6 +4,9 @@ import java.util.*;
 
 public class hangman {
     private static String randomWord;
+    // create an array of letters that have been guessed
+    private static ArrayList<Character> guessedLetters;
+
 
     // Starting Dialog for the Hangman Game
     public static String startingDialog() {
@@ -48,9 +51,11 @@ public class hangman {
 
         // Generate a random index between 0 and the number of words in the word list
         int randomIndex = random.nextInt(words.size());
+        String randomWord = words.get(randomIndex);
 
+        setRandomWord(randomWord);
         // returns the random word given
-        return words.get(randomIndex);
+        return randomWord;
     }
 
     // creates a player for guessing the word given by the computer
@@ -72,129 +77,126 @@ public class hangman {
         return playerTwoName;
     }
 
-    public void printHangingMan(int wrongGuesses) {
-        // TODO: 1/24/2023 construct something that doesn't use if statement for printing the hangman
-        String givenWord = getRandomWord();
-
-
+    public static void printHangingMan(int hangmanStage) {
         // code for printing off the hangman
-        if (wrongGuesses == 0) {
-            System.out.println(
-                    "   +----+\n" +
-                            "        |\n" +
-                            "        |\n" +
-                            "        |\n" +
-                            " =========\n");
-        }
-        if (wrongGuesses > 0) {
-            System.out.println(
-                    "   +----+\n" +
-                            "   O    |\n" +
-                            "        |\n" +
-                            "        |\n" +
-                            " =========\n");
-        }
-        if (wrongGuesses > 1) {
-            System.out.println(
-                    "   +----+\n" +
-                            "   O    |\n" +
-                            "  /|\\  |\n" +
-                            "        |\n" +
-                            " =========\n");
-
-        }
-        if (wrongGuesses > 2) {
-            System.out.println(
-                    "   +----+\n" +
-                            "   O    |\n" +
-                            "  /|\\  |\n" +
-                            "   |    |\n" +
-                            " =========\n");
-        }
-        if (wrongGuesses > 3) {
-            System.out.println(
-                    "   +----+\n" +
-                            "   O    |\n" +
-                            "  /|\\  |\n" +
-                            "   |    |\n" +
-                            " =========\n");
-        }
-        if (wrongGuesses > 4) {
-            System.out.println(
-                    "   +----+\n" +
-                            "   O    |\n" +
-                            "  /|\\  |\n" +
-                            "   |    |\n" +
-                            "   |    |\n" +
-                            " =========\n");
-        }
-        if (wrongGuesses > 5) {
-            System.out.println(
-                    "   +----+\n" +
-                            "   O    |\n" +
-                            "  /|\\  |\n" +
-                            "   |    |\n" +
-                            "   |    |\n" +
-                            "  / \\  |\n" +
-                            " =========\n");
+        switch (hangmanStage) {
+            case 0:
+                System.out.println(
+                        "   +----+\n" +
+                                "        |\n" +
+                                "        |\n" +
+                                "        |\n" +
+                                " =========\n");
+                break;
+            case 1:
+                System.out.println(
+                        "   +----+\n" +
+                                "   O    |\n" +
+                                "        |\n" +
+                                "        |\n" +
+                                " =========\n");
+                break;
+            case 2:
+                System.out.println(
+                        "   +----+\n" +
+                                "   O    |\n" +
+                                "   |    |\n" +
+                                "        |\n" +
+                                " =========\n");
+                break;
+            case 3:
+                System.out.println(
+                        "   +----+\n" +
+                                "   O    |\n" +
+                                "  /|    |\n" +
+                                "        |\n" +
+                                " =========\n");
+                break;
+            case 4:
+                System.out.println(
+                        "   +----+\n" +
+                                "   O    |\n" +
+                                "  /|\\  |\n" +
+                                "        |\n" +
+                                " =========\n");
+                break;
+            case 5:
+                System.out.println(
+                        "   +----+\n" +
+                                "   O    |\n" +
+                                "  /|\\  |\n" +
+                                "   |    |\n" +
+                                " =========\n");
+                break;
+            case 6:
+                System.out.println(
+                        "   +----+\n" +
+                                "   O    |\n" +
+                                "  /|\\  |\n" +
+                                "   |    |\n" +
+                                "   |    |\n" +
+                                " =========\n");
+                break;
+            case 7:
+                System.out.println(
+                        "   +----+\n" +
+                                "   O    |\n" +
+                                "  /|\\  |\n" +
+                                "   |    |\n" +
+                                "   |    |\n" +
+                                "  /     |\n" +
+                                " =========\n");
+                break;
+            case 8:
+                System.out.println(
+                        "   +----+\n" +
+                                "   O    |\n" +
+                                "  /|\\  |\n" +
+                                "   |    |\n" +
+                                "   |    |\n" +
+                                "  / \\  |\n" +
+                                " =========\n");
+                break;
+            default:
+                System.out.println("How did you end up with more than 8 chances?");
         }
 
     }
 
-    public static String inputGuess(char guessLetter) {
-        String wordToGuess = getRandomWord();
-        char[] word = wordToGuess.toCharArray();
-        boolean checkGuessed = containsLetter(guessLetter);
 
-        if(!checkGuessed){
-            for(int i = 0; i <= word.length-1; i++){
-                if (word[i] == guessLetter) {
-                    letterList(guessLetter);
-                }
-            }
-        }else {
-            System.out.println("You have Already guessed that letter. Choose Again.");
-        }
 
-        // returns a string if player guesses right or not
-        return null;
-    }
-
-    public static ArrayList<Character> letterList(char letter){
+    public static ArrayList<Character> guessedList(char letter) {
         ArrayList<Character> guessedList = new ArrayList<>();
         guessedList.add(letter);
+        setGuessedLetters(guessedList);
         return guessedList;
     }
 
-    public static ArrayList<Character> missingLetters(String guess) {
-        String wordToGuess = getRandomWord();
 
-        // Declare a list to store the missing letters
-        ArrayList<Character> missingLetter = new ArrayList<>();
-
-        // Iterate Through each letter in the word to guess
-        for(char letter : wordToGuess.toCharArray()){
-            // Check if the letter is not present in the user's input
-            if(!guess.contains(String.valueOf(letter))){
-                // if the letter is not present, add it to the list of missing letters
-                missingLetter.add(letter);
+    public static boolean alreadyGuessed(char guessLetter) {
+        boolean alreadyGuessed = false;
+        ArrayList<Character> guessedList = new ArrayList<>();
+        if(guessedList.isEmpty()){
+            guessedList.add(guessLetter);
+            alreadyGuessed = true;
+        }
+        for(int i = 0; i < guessedList.size(); i++){
+            if (guessedList.get(i) != guessLetter) {
+                guessedList.add(guessLetter);
+                alreadyGuessed = true;
             }
         }
 
-        // returns a Character of arrays that the player is missing
-        return missingLetter;
-    }
-    public static boolean containsLetter(char guessLetter) {
-        boolean alreadyGuessed = false;
-        ArrayList<Character> guessedList = new ArrayList<>();
-        if(!guessedList.contains(guessLetter)){
-            guessedList.add(guessLetter);
-            alreadyGuessed = true;
-
-        }
-
-        // returns a string if player guesses right or not
+        // returns a character if player guesses that letter already
         return alreadyGuessed;
+    }
+
+    // check if word has underscores,
+    public static boolean isWordGuessed(char[] underscores) {
+        for (int i = 0; i < underscores.length; i++) {
+            if (underscores[i] == '_') return false;
+        }
+        return true;
     }
 
     public static boolean replayGame() {
@@ -225,9 +227,85 @@ public class hangman {
         // return T or F if player wants to replay the game
         return playAgain;
     }
-    
-    public static void startGame() {
 
+    public static void startGame() {
+        int guessedLettersCount = 0;
+
+        Scanner input = new Scanner(System.in);
+        boolean isGameFinished = false;
+        // Randomly chooses a word from the word list.
+        String wordToGuess = generateWord();
+
+        // create an array of underscores the same length as the word to guess
+        char[] underscores = new char[wordToGuess.length()];
+        for (int i = 0; i < underscores.length; i++) {
+            underscores[i] = '_';
+        }
+
+
+        // Set a vvariable to keep track of the stage of the hangman
+        int hangmanStage = 0;
+
+        //Loop until the hangman is fully printed
+        while (hangmanStage < 8) {
+            // print the hangman
+            printHangingMan(hangmanStage);
+
+            // prints the Missed letters
+            System.out.print("Missed letters: ");
+            getGuessedLetters();
+            System.out.println();
+
+            // Ask the user to guess the letter
+            System.out.print("Guess a letter: ");
+            // scanner makes sure that it only accepts the first letter
+            char guessInput = input.next().charAt(0);
+
+            // Check if the letter has been guessed
+            boolean alreadyGuessed = alreadyGuessed(guessInput);
+
+            if(alreadyGuessed){
+                System.out.println("You have already guessed that letter. Choose again.");
+                continue;
+            }
+
+            // Add the letter to the guessed letter array
+            guessedList(guessInput);
+            guessedLettersCount++;
+
+            //check if the letter is in the word to guess
+            boolean isCorrect = false;
+            for (int i = 0; i < wordToGuess.length(); i++) {
+                if (wordToGuess.charAt(i) == guessInput) {
+                    underscores[i] = guessInput;
+                    isCorrect = true;
+                }
+            }
+
+            // if the letter is not in the word, increase the stae of the hangman
+            if(!isCorrect){
+                hangmanStage++;
+                System.out.println("Incorrect.");
+            }else {
+                System.out.println("Correct!");
+            }
+
+            if(isWordGuessed(underscores)){
+                System.out.println("Congratulations! You guessed the word.");
+            }else {
+                // Print the final state of the word to guess
+                System.out.print("Word to guess: ");
+                for (int i = 0; i < underscores.length; i++) {
+                    System.out.print(underscores[i] + " ");
+                }
+                System.out.println();
+
+                // Print a message indicating that the user lost
+                System.out.println("Sorry, you lose. The word was " + wordToGuess + ".");
+            }
+
+
+        }
     }
 
 
@@ -235,19 +313,80 @@ public class hangman {
         return randomWord;
     }
 
-    public void setRandomWord(String randomWord) {
-        this.randomWord = randomWord;
+    public static void setRandomWord(String randomWord) {
+        hangman.randomWord = randomWord;
+    }
+
+    public static ArrayList<Character> getGuessedLetters() {
+        return guessedLetters;
+    }
+
+    public static void setGuessedLetters(ArrayList<Character> guessedLetters) {
+        hangman.guessedLetters = guessedLetters;
     }
 
     public static void main(String[] args) {
+        System.out.println(generateWord());
         System.out.println(startingDialog());
         System.out.println("To start the game Enter your name.");
-        if(!getPlayerTwo().isEmpty()){
-
+        if (!getPlayerTwo().isEmpty()) {
+            startGame();
         }
 
 
-        //System.out.println(generateWord());
-
     }
 }
+
+/*
+Methods to use for Project 7
+
+1.
+    public static ArrayList<Character> missedLetter(char guess) {
+        String wordToGuess = getRandomWord();
+
+        // Declare a list to store the missed letters
+        ArrayList<Character> missedLetter = new ArrayList<>();
+
+        ArrayList<Character> guessList = new ArrayList<>();
+
+        // Iterate Through each letter in the word to guess
+        for (char letter : wordToGuess.toCharArray()) {
+            // Check if the letter is not present in the user's input
+            guessList.add(letter);
+        }
+
+        if (!guessList.contains(guess)) {
+            // if the guessed letter is not present, add it to the list of missing letters
+            missedLetter.add(guess);
+        }
+
+        // returns a Character of arrays that the player is missing
+        return missedLetter;
+    }
+
+2.
+    public static String inputGuess(char guessLetter) {
+        String wordToGuess = getRandomWord();
+        char[] word = wordToGuess.toCharArray();
+        boolean checkGuessed = alreadyGuessed(guessLetter);
+
+        if (!checkGuessed) {
+            for (int i = 0; i <= word.length - 1; i++) {
+                if (word[i] == guessLetter) {
+                    letterList(guessLetter);
+                }
+            }
+        } else {
+            System.out.println("You have Already guessed that letter. Choose Again.");
+        }
+
+        // returns a string if player guesses right or not
+        return null;
+    }
+
+3.
+
+
+
+
+ */
