@@ -8,12 +8,8 @@ public class hangman {
 
     // Starting Dialog for the Hangman Game
     public static String startingDialog() {
-        String startingDialog = "Welcome to the Hangman game, you will be given a word by a computer and all you " +
-                "have to do is guess the word, good luck! \n" +
-                "\nH A N G M A N\n";
-
-        // returns the dialog for starting the game
-        return startingDialog;
+        return "Welcome to the Hangman game, you will be given a word by a computer and all you " +
+                "have to do is guess the word, good luck!\n" + "H A N G M A N\n";
     }
 
     // Player one is the computer who guesses the word for player two
