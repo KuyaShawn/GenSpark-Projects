@@ -30,7 +30,7 @@ public class hangmanTest {
         assertTrue(!hangmanGame.generateWord().isEmpty());
     }
 
-    /*
+
     // Needs fixing. Expected and printed content matches but doesn't want to pass test
     @Test
     public void printHangingManStageOne() {
@@ -41,8 +41,8 @@ public class hangmanTest {
                 "   O    |\n" +
                 "        |\n" +
                 "        |\n" +
-                " =========\n\n";
-        assertEquals(expected, outContent.toString());
+                " =========\n";
+        assertEquals(expected.replaceAll("\\r|\\n", ""), outContent.toString().replaceAll("\\r|\\n", ""));
     }
 
     // Needs fixing. Expected and printed content matches but doesn't want to pass test
@@ -57,11 +57,10 @@ public class hangmanTest {
                 "   |    |\n" +
                 "   |    |\n" +
                 "  / \\  |\n" +
-                " =========\n\n";
-        assertEquals(expected, outContent);
+                " =========\n";
+        assertEquals(expected.replaceAll("\\r|\\n", ""), outContent.toString().replaceAll("\\r|\\n", ""));
     }
-    
-     */
+
 
     @Test
     public void replayGameYes() {
