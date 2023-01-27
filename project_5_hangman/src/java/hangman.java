@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class hangman {
-    private static String randomWord;
     // create an array of letters that have been guessed
     private static ArrayList<Character> guessedLetters;
 
@@ -11,12 +10,7 @@ public class hangman {
     public static String startingDialog() {
         String startingDialog = "Welcome to the Hangman game, you will be given a word by a computer and all you " +
                 "have to do is guess the word, good luck! \n" +
-                "\nH A N G M A N\n" +
-                "   +---+\n" +
-                "       |\n" +
-                "       |\n" +
-                "       |\n" +
-                " ========\n";
+                "\nH A N G M A N\n";
 
         // returns the dialog for starting the game
         return startingDialog;
@@ -52,7 +46,6 @@ public class hangman {
         int randomIndex = random.nextInt(words.size());
         String randomWord = words.get(randomIndex);
 
-        setRandomWord(randomWord);
         // returns the random word given
         return randomWord;
     }
@@ -159,7 +152,6 @@ public class hangman {
             default:
                 System.out.println("How did you end up with more than 8 chances?");
         }
-
     }
 
     public static ArrayList<Character> guessedList(char letter) {
@@ -167,32 +159,6 @@ public class hangman {
         guessedList.add(letter);
         setGuessedLetters(guessedList);
         return guessedList;
-    }
-
-    public static boolean alreadyGuessed(char guessLetter) {
-        boolean alreadyGuessed = false;
-        ArrayList<Character> guessedList = new ArrayList<>();
-        if (guessedList.isEmpty()) {
-            guessedList.add(guessLetter);
-            alreadyGuessed = true;
-        }
-        for (int i = 0; i < guessedList.size(); i++) {
-            if (guessedList.get(i) != guessLetter) {
-                guessedList.add(guessLetter);
-                alreadyGuessed = true;
-            }
-        }
-
-        // returns a character if player guesses that letter already
-        return alreadyGuessed;
-    }
-
-    // check if word has underscores,
-    public static boolean isWordGuessed(char[] underscores) {
-        for (int i = 0; i < underscores.length; i++) {
-            if (underscores[i] == '_') return false;
-        }
-        return true;
     }
 
     public static boolean replayGame() {
@@ -226,10 +192,7 @@ public class hangman {
 
     public static boolean startGame() {
         boolean replayGame = false;
-        int guessedLettersCount = 0;
-
         Scanner input = new Scanner(System.in);
-        boolean isGameFinished = false;
         // Randomly chooses a word from the word list.
         String wordToGuess = generateWord();
 
@@ -239,6 +202,9 @@ public class hangman {
             underscores[i] = '_';
         }
 
+        // Create an array of letters that have been guessed
+        char[] guessedLetters = new char[26];
+        int guessedLettersCount = 0;
 
         // Set a vvariable to keep track of the stage of the hangman
         int hangmanStage = 0;
@@ -259,7 +225,13 @@ public class hangman {
             char guessInput = input.next().charAt(0);
 
             // Check if the letter has been guessed
-            boolean alreadyGuessed = alreadyGuessed(guessInput);
+            boolean alreadyGuessed = false;
+            for (int i = 0; i < guessedLettersCount; i++) {
+                if (guessedLetters[i] == guessInput) {
+                    alreadyGuessed = true;
+                    break;
+                }
+            }
 
             if (alreadyGuessed) {
                 System.out.println("You have already guessed that letter. Choose again.");
@@ -267,7 +239,7 @@ public class hangman {
             }
 
             // Add the letter to the guessed letter array
-            guessedList(guessInput);
+            guessedLetters[guessedLettersCount] = guessInput;
             guessedLettersCount++;
 
             //check if the letter is in the word to guess
@@ -297,23 +269,24 @@ public class hangman {
                 }
                 System.out.println();
 
-                // Print a message indicating that the user lost
-                System.out.println("Sorry, you lose. The word was " + wordToGuess + ".");
             }
-
-            replayGame = replayGame();
-
+            // Print a message indicating that the user lost
+            System.out.println("Sorry, you lose. The word was " + wordToGuess + ".");
         }
+        replayGame = replayGame();
         return replayGame;
     }
 
-    public static String getRandomWord() {
-        return randomWord;
+    // check if list still has underscores
+    public static boolean isWordGuessed(char[] underscores) {
+        for (int i = 0; i < underscores.length; i++) {
+            if (underscores[i] == '_') {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public static void setRandomWord(String randomWord) {
-        hangman.randomWord = randomWord;
-    }
 
     public static ArrayList<Character> getGuessedLetters() {
         return guessedLetters;
@@ -327,14 +300,11 @@ public class hangman {
         boolean playAgain = true;
         System.out.println(generateWord());
         System.out.println(startingDialog());
-        System.out.println("To start the game Enter your name.");
-        if (!getPlayerTwo().isEmpty()) {
-            while (playAgain) {
-                startGame();
-            }
-        }else{
-            System.out.println("Invalid Choice");
+        //System.out.println("To start the game Enter your name.");
+        while (playAgain) {
+            playAgain = startGame();
         }
+
 
     }
 }
@@ -387,8 +357,31 @@ Methods to use for Project 7
     }
 
 3.
+    public static boolean alreadyGuessed(char guessLetter) {
+        boolean alreadyGuessed = false;
+        ArrayList<Character> guessedList = getGuessedLetters();
+        for (int i = 0; i < guessedList.size(); i++) {
+            if (guessedList.get(i) == guessLetter) {
+                guessedList.add(guessLetter);
+                alreadyGuessed = true;
+            }
+        }
 
+        // returns a character if player guesses that letter already
+        return alreadyGuessed;
+    }
 
+4.
+    private static String randomWord;
 
+    public static String getRandomWord() {
+        return randomWord;
+    }
+
+    public static void setRandomWord(String randomWord) {
+        hangman.randomWord = randomWord;
+    }
+
+5.
 
  */
