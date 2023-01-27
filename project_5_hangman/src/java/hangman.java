@@ -198,15 +198,13 @@ public class hangman {
 
         // create an array of underscores the same length as the word to guess
         char[] underscores = new char[wordToGuess.length()];
-        for (int i = 0; i < underscores.length; i++) {
-            underscores[i] = '_';
-        }
+        Arrays.fill(underscores, '_');
 
         // Create an array of letters that have been guessed
         char[] guessedLetters = new char[26];
         int guessedLettersCount = 0;
 
-        // Set a vvariable to keep track of the stage of the hangman
+        // Set a variable to keep track of the stage of the hangman
         int hangmanStage = 0;
 
         //Loop until the hangman is fully printed
@@ -216,7 +214,15 @@ public class hangman {
 
             // prints the Missed letters
             System.out.print("Missed letters: ");
-            getGuessedLetters();
+            for (int i = 0; i < guessedLettersCount; i++) {
+                System.out.print(guessedLetters[i] + " ");
+            }
+            System.out.println();
+
+            // Print the current state of the word to guess
+            for (int i = 0; i < underscores.length; i++) {
+                System.out.print(underscores[i] + " ");
+            }
             System.out.println();
 
             // Ask the user to guess the letter
@@ -251,28 +257,31 @@ public class hangman {
                 }
             }
 
-            // if the letter is not in the word, increase the stae of the hangman
+            // if the letter is not in the word, increase the stage of the hangman drawing
             if (!isCorrect) {
                 hangmanStage++;
                 System.out.println("Incorrect.");
             } else {
                 System.out.println("Correct!");
             }
-
             if (isWordGuessed(underscores)) {
-                System.out.println("Congratulations! You guessed the word.");
-            } else {
-                // Print the final state of the word to guess
-                System.out.print("Word to guess: ");
-                for (int i = 0; i < underscores.length; i++) {
-                    System.out.print(underscores[i] + " ");
-                }
-                System.out.println();
-
+                break;
             }
-            // Print a message indicating that the user lost
-            System.out.println("Sorry, you lose. The word was " + wordToGuess + ".");
         }
+        if (isWordGuessed(underscores)) {
+            System.out.println("Yes! The secret word is \"" + wordToGuess + "\" You have won!");
+        } else {
+            // Print the final state of the word to guess
+            System.out.print("Word to guess: ");
+            for (int i = 0; i < underscores.length; i++) {
+                System.out.print(underscores[i] + " ");
+            }
+            System.out.println();
+
+        }
+        // Print a message indicating that the user lost
+        System.out.println("Sorry, The secret word was \"" + wordToGuess + "\".");
+
         replayGame = replayGame();
         return replayGame;
     }
