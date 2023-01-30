@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/project_1_dragon_cave/project_1_dragon_cave.iml" filepath="$PROJECT_DIR$/project_1_dragon_cave/project_1_dragon_cave.iml" />
       <module fileurl="file://$PROJECT_DIR$/project_2_guess_the_number/project_2_guess_the_number.iml" filepath="$PROJECT_DIR$/project_2_guess_the_number/project_2_guess_the_number.iml" />
       <module fileurl="file://$PROJECT_DIR$/project_5_hangman/project_5_hangman.iml" filepath="$PROJECT_DIR$/project_5_hangman/project_5_hangman.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project_6_human_vs_golins/project_6_human_vs_golins.iml" filepath="$PROJECT_DIR$/project_6_human_vs_golins/project_6_human_vs_golins.iml" />
       <module fileurl="file://$PROJECT_DIR$/project_5_hangman/test/test.iml" filepath="$PROJECT_DIR$/project_5_hangman/test/test.iml" />
     </modules>
   </component>
