@@ -23,6 +23,11 @@ public class creatures {
         return health <= 0;
     }
 
+    public void move(int dx, int dy) {
+        x += dx;
+        y += dy;
+    }
+
     public String getCreatureType() {
         return creatureType;
     }
