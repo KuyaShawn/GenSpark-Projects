@@ -11,5 +11,3 @@ W
 'project_5_hangman/test/hangmanTest.java,d\d\dd6bec47745bab0369810e50ee9d4994845ad043
 i
 9project_2_guess_the_number/src/java/guess_the_number.java,8\c\8c22fcadab2ae4c67bbdcbbe582984293c18add3
-W
-'project_5_hangman/src/java/hangman.java,0\7\07658a47c530f9c25d677cc09bcc3f10d42831ff

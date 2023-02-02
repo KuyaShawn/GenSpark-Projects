@@ -3,11 +3,11 @@ public class Goblin extends Creature {
     int strength;
     int defence;
     int health;
-    int x;
-    int y;
+    int luck;
 
-    public Goblin(String creatureType, int strength, int defence, int health, int luck, int x, int y) {
-        super(creatureType, strength, defence, health, luck ,x, y);
+
+    public Goblin(String creatureType, int strength, int defence, int health, int luck) {
+        super(creatureType, strength, defence, health, luck);
     }
 
     @Override
@@ -15,7 +15,7 @@ public class Goblin extends Creature {
         return "Creature: " + getCreatureType() +
                 "\nHealth: " + getHealth() +
                 "\nStrength: " + getStrength() +
-                "\nX-Position: " + getX() +
-                "\nY-Position: " + getY() + "\n";
+                "\nDefence: " + getDefence() +
+                "\nLuck: " + getLuck() + "\n";
     }
 }

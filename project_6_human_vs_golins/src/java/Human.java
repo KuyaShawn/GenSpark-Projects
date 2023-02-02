@@ -6,15 +6,14 @@ public class Human extends Creature {
     int defence;
     int health;
     int luck;
-    int x;
-    int y;
 
-    public Human(String creatureType, int strength, int defence, int health, int luck ,int x, int y) {
-        super(creatureType, strength, defence, health, luck ,x, y);
+    public Human(String creatureType, int strength, int defence, int health, int luck) {
+        super(creatureType, strength, defence, health, luck);
     }
 
-    public void equipment(String equipment){
-        switch(equipment.toLowerCase()){
+    // Apply equipment in the future
+    public void equipment(String equipment) {
+        switch (equipment.toLowerCase()) {
             case "sword":
                 strength += 5;
                 break;
@@ -55,7 +54,7 @@ public class Human extends Creature {
         return "Creature: " + getCreatureType() +
                 "\nHealth: " + getHealth() +
                 "\nStrength: " + getStrength() +
-                "\nX-Position: " + getX() +
-                "\nY-Position: " + getY()  + "\n";
+                "\nDefence: " + getDefence() +
+                "\nLuck: " + getLuck() + "\n";
     }
 }

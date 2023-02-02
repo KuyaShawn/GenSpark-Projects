@@ -7,14 +7,12 @@ public class Creature {
     int x;
     int y;
 
-    public Creature(String creatureType, int strength, int defence, int health, int luck, int x, int y) {
+    public Creature(String creatureType, int strength, int defence, int health, int luck) {
         this.creatureType = creatureType;
         this.strength = strength;
         this.defence = defence;
         this.health = health;
         this.luck = luck;
-        this.x = x;
-        this.y = y;
     }
 
     public void combat(Creature player) {
@@ -93,29 +91,12 @@ public class Creature {
         this.health = health;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
 
     @Override
     public String toString() {
         return "Creature: " + getCreatureType() +
                 "\nHealth: " + getHealth() +
                 "\nStrength: " + getStrength() +
-                "\nDefence: " + getDefence() +
-                "\nX-Position: " + getX() +
-                "\nY-Position: " + getY();
+                "\nDefence: " + getDefence();
     }
 }
