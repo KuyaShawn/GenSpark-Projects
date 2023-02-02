@@ -1,32 +1,52 @@
-public class Human extends creatures {
+import static java.lang.Math.*;
+
+public class Human extends Creature {
     String creatureType;
     int strength;
     int defence;
     int health;
+    int luck;
     int x;
     int y;
 
-    public Human(String creatureType, int strength, int defence, int health, int x, int y) {
-        super(creatureType, strength, defence, health, x, y);
+    public Human(String creatureType, int strength, int defence, int health, int luck ,int x, int y) {
+        super(creatureType, strength, defence, health, luck ,x, y);
     }
 
-
-
-    public String attack(Goblin goblin){
-        int damage = (int) (Math.random() * strength);
-
-        // if the Human doesn't have enough strength to attack the Goblin's large defence.
-        // A critical chance is the only way for it to defeat it
-        if (Math.random() < 0.3) {
-            damage = damage * 10;
-            System.out.println("Critical Hit!");
-        }
-
-        if (damage < goblin.defence) {
-            return "Your attack did no damage";
-        } else {
-            goblin.isHit(damage);
-            return "You attacked the " + goblin.getCreatureType() + " and damaged it for " + damage + "!";
+    public void equipment(String equipment){
+        switch(equipment.toLowerCase()){
+            case "sword":
+                strength += 5;
+                break;
+            case "shield":
+                defence += 3;
+                break;
+            case "amulet":
+                health += 4;
+                luck += 4;
+                break;
+            case "ring":
+                health += 2;
+                luck += 2;
+                break;
+            case "armored chest":
+                defence += 4;
+                break;
+            case "armored leg":
+                defence += 4;
+                break;
+            case "armored shoe":
+                defence += 1;
+                break;
+            case "armored helmet":
+                defence += 3;
+                break;
+            case "armored gauntlet":
+                defence += 1;
+                strength += 1;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + equipment.toLowerCase());
         }
     }
 
