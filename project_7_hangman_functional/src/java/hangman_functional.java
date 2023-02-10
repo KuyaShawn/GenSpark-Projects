@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class hangman {
+public class hangman_functional {
     // create an array of letters that have been guessed
     private static ArrayList<Character> guessedLetters;
 
@@ -158,13 +158,6 @@ public class hangman {
         }
     }
 
-    public static ArrayList<Character> guessedList(char letter) {
-        ArrayList<Character> guessedList = new ArrayList<>();
-        guessedList.add(letter);
-        setGuessedLetters(guessedList);
-        return guessedList;
-    }
-
     public static boolean replayGame() {
         // code for replaying the game
         boolean playAgain = false;
@@ -307,7 +300,7 @@ public class hangman {
     }
 
     public static void setGuessedLetters(ArrayList<Character> guessedLetters) {
-        hangman.guessedLetters = guessedLetters;
+        hangman_functional.guessedLetters = guessedLetters;
     }
 
     public static void main(String[] args) {
@@ -322,80 +315,3 @@ public class hangman {
 
     }
 }
-
-/*
-Methods to use for Project 7
-
-1.
-    public static ArrayList<Character> missedLetter(char guess) {
-        String wordToGuess = getRandomWord();
-
-        // Declare a list to store the missed letters
-        ArrayList<Character> missedLetter = new ArrayList<>();
-
-        ArrayList<Character> guessList = new ArrayList<>();
-
-        // Iterate Through each letter in the word to guess
-        for (char letter : wordToGuess.toCharArray()) {
-            // Check if the letter is not present in the user's input
-            guessList.add(letter);
-        }
-
-        if (!guessList.contains(guess)) {
-            // if the guessed letter is not present, add it to the list of missing letters
-            missedLetter.add(guess);
-        }
-
-        // returns a Character of arrays that the player is missing
-        return missedLetter;
-    }
-
-2.
-    public static String inputGuess(char guessLetter) {
-        String wordToGuess = getRandomWord();
-        char[] word = wordToGuess.toCharArray();
-        boolean checkGuessed = alreadyGuessed(guessLetter);
-
-        if (!checkGuessed) {
-            for (int i = 0; i <= word.length - 1; i++) {
-                if (word[i] == guessLetter) {
-                    letterList(guessLetter);
-                }
-            }
-        } else {
-            System.out.println("You have Already guessed that letter. Choose Again.");
-        }
-
-        // returns a string if player guesses right or not
-        return null;
-    }
-
-3.
-    public static boolean alreadyGuessed(char guessLetter) {
-        boolean alreadyGuessed = false;
-        ArrayList<Character> guessedList = getGuessedLetters();
-        for (int i = 0; i < guessedList.size(); i++) {
-            if (guessedList.get(i) == guessLetter) {
-                guessedList.add(guessLetter);
-                alreadyGuessed = true;
-            }
-        }
-
-        // returns a character if player guesses that letter already
-        return alreadyGuessed;
-    }
-
-4.
-    private static String randomWord;
-
-    public static String getRandomWord() {
-        return randomWord;
-    }
-
-    public static void setRandomWord(String randomWord) {
-        hangman.randomWord = randomWord;
-    }
-
-5.
-
- */

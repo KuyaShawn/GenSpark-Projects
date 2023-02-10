@@ -11442,7 +11442,7 @@ creativity
 creator
 creators
 creature
-creatures
+Creature
 creche
 creches
 credence
@@ -22041,7 +22041,7 @@ gobies
 goblet
 goblets
 goblin
-goblins
+Goblin
 god
 godchild
 goddess
@@ -24664,7 +24664,7 @@ humanly
 humanness
 humanoid
 humanoids
-humans
+Human
 humble
 humbled
 humbleness
@@ -28634,7 +28634,7 @@ lances
 lancet
 lancets
 lancing
-land
+Land
 landed
 lander
 landfall

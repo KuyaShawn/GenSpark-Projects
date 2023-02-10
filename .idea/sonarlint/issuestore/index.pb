@@ -11,17 +11,3 @@ i
 9project_2_guess_the_number/src/java/guess_the_number.java,8\c\8c22fcadab2ae4c67bbdcbbe582984293c18add3
 ]
 -project_6_human_vs_golins/src/java/Human.java,d\a\da6c1116be10f78ae726b8d08b524617d300caac
-W
-'project_5_hangman/src/java/hangman.java,0\7\07658a47c530f9c25d677cc09bcc3f10d42831ff
-\
-,project_6_human_vs_golins/src/java/Main.java,f\3\f3b4fbb5609dd5d1a3208bc9caa9f722308deaf2
-^
-.project_6_human_vs_golins/src/java/Goblin.java,e\c\ecec5d10c8bded99c0989ed583241c5cc977baff
-\
-,project_6_human_vs_golins/src/java/Land.java,4\a\4a33fb880215ff0f54aa3eca0745defe4c1b1d94
-W
-'project_5_hangman/test/hangmanTest.java,d\d\dd6bec47745bab0369810e50ee9d4994845ad043
-[
-+project_6_human_vs_golins/test/HvGTest.java,1\0\10aadad48f91ddf24886b71caae9ead5f45fa404
-`
-0project_6_human_vs_golins/src/java/Creature.java,0\e\0e82468e6887a5a045266f22c4884a6bf07cfac9
