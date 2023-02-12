@@ -1,17 +1,16 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class hangman_functional {
-    // create an array of letters that have been guessed
-    private static ArrayList<Character> guessedLetters;
-
     // Starting Dialog for the Hangman Game
     public static String startingDialog() {
         try {
             return "Welcome to the Hangman game, you will be given a word by a computer and all you " +
                     "have to do is guess the word, good luck!\n" + "H A N G M A N\n";
-        }catch (Exception e){
+        } catch (IllegalArgumentException e) {
             return "Failed to display Starting Message.";
         }
     }
@@ -20,7 +19,7 @@ public class hangman_functional {
     public static String generateWord() {
         // Create a Random object to generate a random index
         Random random = new Random();
-        String fileName = "C:/Users/Big Daddy/Documents/GitHub/GenSpark-Projects/project_5_hangman/src/resources/wordlist.txt";
+        String fileName = "C:/Users/Big Daddy/Documents/GitHub/GenSpark-Projects/project_7_hangman_functional/src/resources/wordlist.txt";
         // Declares an empty List of strings called "words"
         List<String> words = new ArrayList<>();
 
@@ -44,10 +43,9 @@ public class hangman_functional {
 
         // Generate a random index between 0 and the number of words in the word list
         int randomIndex = random.nextInt(words.size());
-        String randomWord = words.get(randomIndex);
 
         // returns the random word given
-        return randomWord;
+        return words.get(randomIndex);
     }
 
     // creates a player for guessing the word given by the computer
@@ -68,93 +66,23 @@ public class hangman_functional {
 
             // return Name
             return playerTwoName;
-        }catch (Exception e){
+        } catch (IllegalArgumentException e) {
             return "Failed to retrieve user input";
         }
     }
 
-    public static void printHangingMan(int hangmanStage) {
-        // code for printing off the hangman
-        switch (hangmanStage) {
-            case 0:
-                System.out.println(
-                        "   +----+\n" +
-                                "        |\n" +
-                                "        |\n" +
-                                "        |\n" +
-                                " =========\n");
-                break;
-            case 1:
-                System.out.println(
-                        "   +----+\n" +
-                                "   O    |\n" +
-                                "        |\n" +
-                                "        |\n" +
-                                " =========\n");
-                break;
-            case 2:
-                System.out.println(
-                        "   +----+\n" +
-                                "   O    |\n" +
-                                "   |    |\n" +
-                                "        |\n" +
-                                " =========\n");
-                break;
-            case 3:
-                System.out.println(
-                        "   +----+\n" +
-                                "   O    |\n" +
-                                "  /|    |\n" +
-                                "        |\n" +
-                                " =========\n");
-                break;
-            case 4:
-                System.out.println(
-                        "   +----+\n" +
-                                "   O    |\n" +
-                                "  /|\\  |\n" +
-                                "        |\n" +
-                                " =========\n");
-                break;
-            case 5:
-                System.out.println(
-                        "   +----+\n" +
-                                "   O    |\n" +
-                                "  /|\\  |\n" +
-                                "   |    |\n" +
-                                " =========\n");
-                break;
-            case 6:
-                System.out.println(
-                        "   +----+\n" +
-                                "   O    |\n" +
-                                "  /|\\  |\n" +
-                                "   |    |\n" +
-                                "   |    |\n" +
-                                " =========\n");
-                break;
-            case 7:
-                System.out.println(
-                        "   +----+\n" +
-                                "   O    |\n" +
-                                "  /|\\  |\n" +
-                                "   |    |\n" +
-                                "   |    |\n" +
-                                "  /     |\n" +
-                                " =========\n");
-                break;
-            case 8:
-                System.out.println(
-                        "   +----+\n" +
-                                "   O    |\n" +
-                                "  /|\\  |\n" +
-                                "   |    |\n" +
-                                "   |    |\n" +
-                                "  / \\  |\n" +
-                                " =========\n");
-                break;
-            default:
-                System.out.println("How did you end up with more than 8 chances?");
+    public static void printHangingMan(int hangmanStage) throws RuntimeException {
+        try {
+            File file = new File("C:/Users/Big Daddy/Documents/GitHub/GenSpark-Projects/project_7_hangman_functional/src/java/stage" + hangmanStage);
+            FileReader fr = new FileReader(file);
+            int c;
+            while ((c = fr.read()) != -1) {
+                System.out.print((char) c);
+            }
+            System.out.println();
+            fr.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -211,17 +139,10 @@ public class hangman_functional {
             printHangingMan(hangmanStage);
 
             // prints the Missed letters
-            System.out.print("Missed letters: ");
-            for (int i = 0; i < guessedLettersCount; i++) {
-                System.out.print(guessedLetters[i] + " ");
-            }
-            System.out.println();
+            printMissedLetters(guessedLetters, guessedLettersCount);
 
             // Print the current state of the word to guess
-            for (int i = 0; i < underscores.length; i++) {
-                System.out.print(underscores[i] + " ");
-            }
-            System.out.println();
+            printCurrentState(underscores);
 
             // Ask the user to guess the letter
             System.out.print("Guess a letter: ");
@@ -229,15 +150,7 @@ public class hangman_functional {
             char guessInput = input.next().charAt(0);
 
             // Check if the letter has been guessed
-            boolean alreadyGuessed = false;
-            for (int i = 0; i < guessedLettersCount; i++) {
-                if (guessedLetters[i] == guessInput) {
-                    alreadyGuessed = true;
-                    break;
-                }
-            }
-
-            if (alreadyGuessed) {
+            if (hasLetterBeenGuessed(guessInput, guessedLetters, guessedLettersCount)) {
                 System.out.println("You have already guessed that letter. Choose again.");
                 continue;
             }
@@ -246,7 +159,69 @@ public class hangman_functional {
             guessedLetters[guessedLettersCount] = guessInput;
             guessedLettersCount++;
 
-            //check if the letter is in the word to guess
+            //checks if the letter is present in the word, if not then increase the stage of the hangman drawing
+            if (!isLetterInWord(guessInput, wordToGuess, underscores)) {
+                hangmanStage++;
+                System.out.println("Incorrect.\n");
+            } else {
+                System.out.println("Correct!\n");
+            }
+            if (isWordGuessed(underscores)) {
+                break;
+            }
+        }
+
+        if (isWordGuessed(underscores)) {
+            System.out.println("Yes! The secret word is \"" + wordToGuess + "\" You have won!\n");
+        } else {
+            // Print a message indicating that the user lost
+            System.out.println("Sorry, The secret word was \"" + wordToGuess + "\".\n");
+        }
+        replayGame = replayGame();
+        return replayGame;
+    }
+
+    public static void printMissedLetters(char[] guessedLetters, int guessedLettersCount) {
+        try {
+            System.out.print("Missed letters: ");
+            for (int i = 0; i < guessedLettersCount; i++) {
+                System.out.print(guessedLetters[i] + " ");
+            }
+            System.out.println();
+        } catch (Exception e) {
+            System.out.println("Caught Exception: Cannot get retrieve guessed letter.");
+        }
+    }
+
+    public static void printCurrentState(char[] underscores) {
+        try {
+            for (char underscore : underscores) {
+                System.out.print(underscore + " ");
+            }
+            System.out.println();
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Failed to print current state");
+        }
+
+    }
+
+    public static boolean hasLetterBeenGuessed(char guessInput, char[] guessedLetters, int guessedLettersCount) {
+        try {
+            boolean alreadyGuessed = false;
+            for (int i = 0; i < guessedLettersCount; i++) {
+                if (guessedLetters[i] == guessInput) {
+                    alreadyGuessed = true;
+                    break;
+                }
+            }
+            return alreadyGuessed;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Failed to check each letter");
+        }
+    }
+
+    public static boolean isLetterInWord(char guessInput, String wordToGuess, char[] underscores) {
+        try {
             boolean isCorrect = false;
             for (int i = 0; i < wordToGuess.length(); i++) {
                 if (wordToGuess.charAt(i) == guessInput) {
@@ -254,64 +229,25 @@ public class hangman_functional {
                     isCorrect = true;
                 }
             }
-
-            // if the letter is not in the word, increase the stage of the hangman drawing
-            if (!isCorrect) {
-                hangmanStage++;
-                System.out.println("Incorrect.");
-            } else {
-                System.out.println("Correct!");
-            }
-            if (isWordGuessed(underscores)) {
-                break;
-            }
+            return isCorrect;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Failed to retrieve information");
         }
-        if (isWordGuessed(underscores)) {
-            System.out.println("Yes! The secret word is \"" + wordToGuess + "\" You have won!");
-        } else {
-            // Print the final state of the word to guess
-            System.out.print("Word to guess: ");
-            for (int i = 0; i < underscores.length; i++) {
-                System.out.print(underscores[i] + " ");
-            }
-            System.out.println();
 
-        }
-        // Print a message indicating that the user lost
-        System.out.println("Sorry, The secret word was \"" + wordToGuess + "\".");
-
-        replayGame = replayGame();
-        return replayGame;
     }
 
     // check if list still has underscores
     public static boolean isWordGuessed(char[] underscores) {
-        for (int i = 0; i < underscores.length; i++) {
-            if (underscores[i] == '_') {
-                return false;
+        try {
+            for (char underscore : underscores) {
+                if (underscore == '_') {
+                    return false;
+                }
             }
+            return true;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Failed to check if word is guessed by user");
         }
-        return true;
     }
 
-
-    public static ArrayList<Character> getGuessedLetters() {
-        return guessedLetters;
-    }
-
-    public static void setGuessedLetters(ArrayList<Character> guessedLetters) {
-        hangman_functional.guessedLetters = guessedLetters;
-    }
-
-    public static void main(String[] args) {
-        boolean playAgain = true;
-        System.out.println(generateWord());
-        System.out.println(startingDialog());
-        //System.out.println("To start the game Enter your name.");
-        while (playAgain) {
-            playAgain = startGame();
-        }
-
-
-    }
 }

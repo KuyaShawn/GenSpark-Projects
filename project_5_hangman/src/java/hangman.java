@@ -86,7 +86,7 @@ public class hangman {
                 break;
             case 1:
                 System.out.println(
-                        "   +----+\n" +
+                                "   +----+\n" +
                                 "   O    |\n" +
                                 "        |\n" +
                                 "        |\n" +
