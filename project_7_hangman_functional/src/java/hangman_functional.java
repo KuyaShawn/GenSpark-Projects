@@ -308,9 +308,6 @@ public class hangman_functional {
             System.out.println("Error: Scores file not found");
             return;
         }
-        if (scores.size() < 3) {
-            return;
-        }
         HashMap<String, Integer> scoresMap = new HashMap<>();
         scores.sort((x, y) -> {
             int score1 = Integer.parseInt(y.split(":")[1]);
