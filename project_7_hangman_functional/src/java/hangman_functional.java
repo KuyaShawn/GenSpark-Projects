@@ -108,7 +108,7 @@ public class hangman_functional {
                     playAgain = true;
                     resetScore();
                 } else if (replayChoice.equalsIgnoreCase("no")) {
-                    //printTopRankings(); THIS IS BROKEN FOR NOW
+                    printTopRankings();
                     resetScore();
                     return false;
                 } else {
@@ -299,8 +299,9 @@ public class hangman_functional {
         }
     }
 
-    // METHOD IS BROKEN :(
     public static void printTopRankings() {
+
+        // Attempts to read the scores from the file
         List<String> scores;
         try {
             scores = Files.readAllLines(Paths.get("C:/Users/Big Daddy/Documents/GitHub/GenSpark-Projects/project_7_hangman_functional/src/java/scores"));
@@ -308,23 +309,34 @@ public class hangman_functional {
             System.out.println("Error: Scores file not found");
             return;
         }
-        HashMap<String, Integer> scoresMap = new HashMap<>();
-        scores.sort((x, y) -> {
-            int score1 = Integer.parseInt(y.split(":")[1]);
-            int score2 = Integer.parseInt(x.split(":")[1]);
-            return score1 - score2;
-        });
-        System.out.println("Rankings:");
-        for (int i = 0; i < 3; i++) {
-            String[] parts = scores.get(i).split(":");
-            String name = parts[0];
-            int score = Integer.parseInt(parts[1]);
-            scoresMap.put(name, score);
-            System.out.println((i + 1) + ". " + name + " - " + score);
-        }
-        if (scoresMap.containsKey(name)) {
-            System.out.println("Your rank # is" + (scoresMap.get(name) + 1)
-                    + ", with a score of " + scoresMap.get(name) + ".");
+
+
+        try {
+            // read into a list of strings, where each string represents a score in the format "scoreHolder:highScore"
+            int highScore = 0;
+            String scoreHolder = "";
+            // iterate through each score, and checks if the current score is higher than the highest score seen so far. If it is, then the highest score and the corresponding name is updated
+            for (String score : scores) {
+                String[] parts = score.split(":");
+                int currScore = Integer.parseInt(parts[1]);
+                if (highScore < currScore) {
+                    highScore = currScore;
+                    scoreHolder = parts[0];
+                }
+            }
+            
+            /*
+            the code checks if the highest score is equal to the score of the current player (which is stored in the last element of the list scores).
+            If it is, then the current player holds the highest score is printed. If not, then a message is printed indicating that the current player's score is not the highest
+             */
+            int score = Integer.parseInt(scores.get(scores.size() - 1).split(":")[1]);
+            if (highScore == score) {
+                System.out.println("You are now the highest score holder with a score of " + score + ".");
+            } else {
+                System.out.println("You scored a total of " + score + ". The current holder is " + scoreHolder + " with a score of" + highScore + ".");
+            }
+        } catch (Exception e) {
+            System.out.println("Couldn't find high score");
         }
     }
 

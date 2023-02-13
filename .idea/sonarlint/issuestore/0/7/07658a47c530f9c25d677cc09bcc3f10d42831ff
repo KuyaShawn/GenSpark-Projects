@@ -1,0 +1,69 @@
+
+a
+java:S1192s"KDefine a constant instead of duplicating this literal "  /|\\  |
+" 5 times.(è‹“
+a
+java:S1192R"KDefine a constant instead of duplicating this literal "        |
+" 8 times.(ºÕºÄ
+f
+java:S1192Z"KDefine a constant instead of duplicating this literal "   O    |
+" 8 times.(§‘€öøÿÿÿÿ
+f
+java:S1192Q"KDefine a constant instead of duplicating this literal "   +----+
+" 9 times.(•§¡´øÿÿÿÿ
+g
+java:S1192U"LDefine a constant instead of duplicating this literal " =========
+" 9 times.(Ä¥Ä‘üÿÿÿÿ
+a
+java:S1192c"KDefine a constant instead of duplicating this literal "   |    |
+" 8 times.(‡“Œ
+o	java:S135Ø"YReduce the total number of break and continue statements in this loop to use at most one.(°ô…ª
+‡
+java:S1319¡"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(……‡Ç
+Œ
+java:S1319±"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¼¶¾Õúÿÿÿÿ
+„
+java:S1319µ"nThe type of "guessedLetters" should be an interface such as "List" rather than the implementation "ArrayList".(×·s
+x
+java:S1488/"bImmediately return this expression instead of assigning it to the temporary variable "randomWord".(ı°¥Æ
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(é§åğûÿÿÿÿ
+3
+java:S2119"Save and re-use this "Random".(¼İÅf
+W
+java:S1075"ARefactor your code to get this URI from a customizable parameter.(™çŠ×
+N	java:S106*"9Replace this use of System.out or System.err by a logger.(ø®“«
+S	java:S106;"9Replace this use of System.out or System.err by a logger.(ì·£Êşÿÿÿÿ
+N	java:S106P"9Replace this use of System.out or System.err by a logger.(ÆÀûı
+U	java:S106X"9Replace this use of System.out or System.err by a logger.(ÆÀûı8›ãÅãã0
+U	java:S106`"9Replace this use of System.out or System.err by a logger.(ÆÀûı8›ãÅãã0
+U	java:S106h"9Replace this use of System.out or System.err by a logger.(ÆÀûı8›ãÅãã0
+U	java:S106p"9Replace this use of System.out or System.err by a logger.(ÆÀûı8›ãÅãã0
+U	java:S106x"9Replace this use of System.out or System.err by a logger.(ÆÀûı8œãÅãã0
+V	java:S106€"9Replace this use of System.out or System.err by a logger.(ÆÀûı8œãÅãã0
+V	java:S106‰"9Replace this use of System.out or System.err by a logger.(ÆÀûı8œãÅãã0
+V	java:S106“"9Replace this use of System.out or System.err by a logger.(ÆÀûı8œãÅãã0
+V	java:S106"9Replace this use of System.out or System.err by a logger.(×¹„Æ8ãÅãã0
+V	java:S106°"9Replace this use of System.out or System.err by a logger.(½øş²8ãÅãã0
+V	java:S106¼"9Replace this use of System.out or System.err by a logger.(ùúÁ8ŸãÅãã0
+p
+java:S3776Å"RRefactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.(éœƒŒ8ŸãÅãã0
+L
+java:S1481Æ".Remove this unused "countWins" local variable.(°‰Ô–8«¢øãã0
+V	java:S106İ"9Replace this use of System.out or System.err by a logger.(÷ş†¿8¡ãÅãã0
+[	java:S106ß"9Replace this use of System.out or System.err by a logger.(†­çéøÿÿÿÿ8¡ãÅãã0
+T	java:S106á"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ
+[	java:S106å"9Replace this use of System.out or System.err by a logger.(ŒÔ –ùÿÿÿÿ8¡ãÅãã0
+T	java:S106ç"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ
+V	java:S106ê"9Replace this use of System.out or System.err by a logger.(²şê´8¢ãÅãã0
+V	java:S106ø"9Replace this use of System.out or System.err by a logger.(µëĞ8¢ãÅãã0
+[	java:S106Œ"9Replace this use of System.out or System.err by a logger.(âíÄÎûÿÿÿÿ8£ãÅãã0
+V	java:S106"9Replace this use of System.out or System.err by a logger.(²˜ÅÖ8£ãÅãã0
+V	java:S106•"9Replace this use of System.out or System.err by a logger.(‹ùâ8¤ãÅãã0
+[	java:S106˜"9Replace this use of System.out or System.err by a logger.(´Š¤œùÿÿÿÿ8¤ãÅãã0
+[	java:S106š"9Replace this use of System.out or System.err by a logger.(ŒÔ –ùÿÿÿÿ8¤ãÅãã0
+[	java:S106œ"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8¤ãÅãã0
+V	java:S106 "9Replace this use of System.out or System.err by a logger.(òıÅ©8¥ãÅãã0
+V	java:S106»"9Replace this use of System.out or System.err by a logger.(°òÒ8¦ãÅãã0
+[	java:S106¼"9Replace this use of System.out or System.err by a logger.(îà¢úÿÿÿÿ8¦ãÅãã0
+Y	java:S125½"<This block of commented-out lines of code should be removed.(¨‡¡ò8§ãÅãã0
+^	java:S125Ê"<This block of commented-out lines of code should be removed.(„ÿçÿÿÿÿÿ8§ãÅãã0
