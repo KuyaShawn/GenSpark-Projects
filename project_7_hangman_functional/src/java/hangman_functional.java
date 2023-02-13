@@ -2,9 +2,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class hangman_functional {
+    // keeps track of player score.
+    private static int score = 0;
+    private static String name = "";
+
     // Starting Dialog for the Hangman Game
     public static String startingDialog() {
         try {
@@ -49,7 +56,7 @@ public class hangman_functional {
     }
 
     // creates a player for guessing the word given by the computer
-    public static String getPlayerTwo() {
+    public void getPlayerTwo() {
         try {
             // code for getting player name
             Scanner userInput = new Scanner(System.in);
@@ -65,9 +72,9 @@ public class hangman_functional {
             }
 
             // return Name
-            return playerTwoName;
+            this.name = playerTwoName;
         } catch (IllegalArgumentException e) {
-            return "Failed to retrieve user input";
+            throw new IllegalArgumentException("Failed to retrieve user input");
         }
     }
 
@@ -99,7 +106,10 @@ public class hangman_functional {
 
                 if (replayChoice.equalsIgnoreCase("yes")) {
                     playAgain = true;
+                    resetScore();
                 } else if (replayChoice.equalsIgnoreCase("no")) {
+                    //printTopRankings(); THIS IS BROKEN FOR NOW
+                    resetScore();
                     return false;
                 } else {
                     throw new IllegalArgumentException();
@@ -116,7 +126,6 @@ public class hangman_functional {
     }
 
     public static boolean startGame() {
-        int countWins = 0;
         boolean replayGame = false;
         Scanner input = new Scanner(System.in);
         // Randomly chooses a word from the word list.
@@ -162,8 +171,10 @@ public class hangman_functional {
             //checks if the letter is present in the word, if not then increase the stage of the hangman drawing
             if (!isLetterInWord(guessInput, wordToGuess, underscores)) {
                 hangmanStage++;
+                subtractScore();
                 System.out.println("Incorrect.\n");
             } else {
+                addScore();
                 System.out.println("Correct!\n");
             }
             if (isWordGuessed(underscores)) {
@@ -173,9 +184,11 @@ public class hangman_functional {
 
         if (isWordGuessed(underscores)) {
             System.out.println("Yes! The secret word is \"" + wordToGuess + "\" You have won!\n");
+            saveScore();
         } else {
             // Print a message indicating that the user lost
             System.out.println("Sorry, The secret word was \"" + wordToGuess + "\".\n");
+            saveScore();
         }
         replayGame = replayGame();
         return replayGame;
@@ -250,4 +263,99 @@ public class hangman_functional {
         }
     }
 
+    public static void saveScore() {
+        String line = String.format("%s:%s\n", name, score);
+        List<String> scores;
+
+        try {
+            scores = Files.readAllLines(Paths.get("C:/Users/Big Daddy/Documents/GitHub/GenSpark-Projects/project_7_hangman_functional/src/java/scores"));
+        } catch (IOException err) {
+            System.out.println("Caught Exception: Scores file not found");
+            return;
+        }
+
+        boolean hasHigherScore = false;
+        for (String scoreLine : scores) {
+            String[] parts = scoreLine.split(":");
+            if (parts[0].equals(name)) {
+                int oldScore = Integer.parseInt(parts[1]);
+                if (score > oldScore) {
+                    hasHigherScore = true;
+                    break;
+                } else {
+                    return;
+                }
+            }
+        }
+
+        try {
+            if (hasHigherScore) {
+                scores.removeIf(scoreLine -> scoreLine.startsWith(name + ":"));
+            }
+            scores.add(line);
+            Files.write(Paths.get("C:/Users/Big Daddy/Documents/GitHub/GenSpark-Projects/project_7_hangman_functional/src/java/scores"), scores, StandardCharsets.UTF_8);
+        } catch (IOException err) {
+            System.out.println("Error: Scores file not found");
+        }
+    }
+
+    // METHOD IS BROKEN :(
+    public static void printTopRankings() {
+        List<String> scores;
+        try {
+            scores = Files.readAllLines(Paths.get("C:/Users/Big Daddy/Documents/GitHub/GenSpark-Projects/project_7_hangman_functional/src/java/scores"));
+        } catch (IOException e) {
+            System.out.println("Error: Scores file not found");
+            return;
+        }
+        if (scores.size() < 3) {
+            return;
+        }
+        HashMap<String, Integer> scoresMap = new HashMap<>();
+        scores.sort((x, y) -> {
+            int score1 = Integer.parseInt(y.split(":")[1]);
+            int score2 = Integer.parseInt(x.split(":")[1]);
+            return score1 - score2;
+        });
+        System.out.println("Rankings:");
+        for (int i = 0; i < 3; i++) {
+            String[] parts = scores.get(i).split(":");
+            String name = parts[0];
+            int score = Integer.parseInt(parts[1]);
+            scoresMap.put(name, score);
+            System.out.println((i + 1) + ". " + name + " - " + score);
+        }
+        if (scoresMap.containsKey(name)) {
+            System.out.println("Your rank # is" + (scoresMap.get(name) + 1)
+                    + ", with a score of " + scoresMap.get(name) + ".");
+        }
+    }
+
+    public static void addScore() {
+        score += 1;
+    }
+
+    public static void subtractScore() {
+        score -= 1;
+    }
+
+    public static void resetScore() {
+        score = 0;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
