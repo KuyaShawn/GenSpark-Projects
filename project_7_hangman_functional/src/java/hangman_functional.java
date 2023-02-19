@@ -324,7 +324,7 @@ public class hangman_functional {
                     scoreHolder = parts[0];
                 }
             }
-            
+
             /*
             the code checks if the highest score is equal to the score of the current player (which is stored in the last element of the list scores).
             If it is, then the current player holds the highest score is printed. If not, then a message is printed indicating that the current player's score is not the highest

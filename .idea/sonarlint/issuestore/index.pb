@@ -45,3 +45,5 @@ W
 'project_5_hangman/test/hangmanTest.java,d\d\dd6bec47745bab0369810e50ee9d4994845ad043
 m
 =project_7_hangman_functional/test/hangman_functionalTest.java,7\4\74fed58842da8d362ef036d6271f7722a7f39b0d
+\
+,project_7_hangman_functional/src/java/scores,e\5\e531181a1f2021ab6590a0038a651f594e748ae5
