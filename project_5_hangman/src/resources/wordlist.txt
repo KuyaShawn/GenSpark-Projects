@@ -11442,7 +11442,7 @@ creativity
 creator
 creators
 creature
-Creature
+com.example.project_8_human_vs_goblins_gui.Creature
 creche
 creches
 credence
@@ -22041,7 +22041,7 @@ gobies
 goblet
 goblets
 goblin
-Goblin
+com.example.project_8_human_vs_goblins_gui.Goblin
 god
 godchild
 goddess
@@ -24664,7 +24664,7 @@ humanly
 humanness
 humanoid
 humanoids
-Human
+com.example.project_8_human_vs_goblins_gui.Human
 humble
 humbled
 humbleness
@@ -28634,7 +28634,7 @@ lances
 lancet
 lancets
 lancing
-Land
+com.example.project_8_human_vs_goblins_gui.Land
 landed
 lander
 landfall

@@ -1,3 +1,5 @@
+package com.example.project_8_human_vs_goblins_gui;
+
 public class Creature {
     String creatureType;
     int strength;
@@ -31,7 +33,7 @@ public class Creature {
                 return;
             }
 
-            // Creature
+            // com.example.project_8_human_vs_goblins_gui.Creature
             setHealth(getHealth() - playerAttack);
             System.out.println(player.getCreatureType() + " attacked " + getCreatureType() + " for " + playerAttack + " dmg");
 
@@ -94,7 +96,7 @@ public class Creature {
 
     @Override
     public String toString() {
-        return "Creature: " + getCreatureType() +
+        return "com.example.project_8_human_vs_goblins_gui.Creature: " + getCreatureType() +
                 "\nHealth: " + getHealth() +
                 "\nStrength: " + getStrength() +
                 "\nDefence: " + getDefence();

@@ -1,3 +1,5 @@
+package com.example.project_8_human_vs_goblins_gui;
+
 public class Human extends Creature {
     String creatureType;
     int strength;
@@ -49,7 +51,7 @@ public class Human extends Creature {
 
     @Override
     public String toString() {
-        return "Creature: " + getCreatureType() +
+        return "com.example.project_8_human_vs_goblins_gui.Creature: " + getCreatureType() +
                 "\nHealth: " + getHealth() +
                 "\nStrength: " + getStrength() +
                 "\nDefence: " + getDefence() +

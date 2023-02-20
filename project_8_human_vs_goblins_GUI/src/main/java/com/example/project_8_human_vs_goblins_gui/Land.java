@@ -1,9 +1,11 @@
+package com.example.project_8_human_vs_goblins_gui;
+
 public class Land {
     int rows;
     int columns;
     int[][] gameBoard;
 
-    // UTF character for human & Goblin
+    // UTF character for human & com.example.project_8_human_vs_goblins_gui.Goblin
     private String humanUTF = "\uD83E\uDDCD";
     private String goblinUTF = "\uD83D\uDC79";
 

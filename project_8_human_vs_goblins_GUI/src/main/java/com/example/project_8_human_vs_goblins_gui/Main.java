@@ -1,3 +1,5 @@
+package com.example.project_8_human_vs_goblins_gui;
+
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -34,7 +36,7 @@ public class Main {
                 System.out.println("or will you press 'c' to start a fight if a goblin is nearby?");
                 String movementInput = input.nextLine();
 
-                // Goblin movement
+                // com.example.project_8_human_vs_goblins_gui.Goblin movement
                 if (!Objects.equals(gob_x_pos, hum_x_pos)) {
                     if (gob_x_pos > hum_x_pos) {
                         gob_x_pos = gob_x_pos - 1;
